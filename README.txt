@@ -1,0 +1,31 @@
+---=== OVERVIEW ===---
+This is a Game of Life game proposed by John Conway, made in the Processing Language
+Environment. 
+
+---=== DEBUGGING ===---
+This program has been tested on Processing 3.3.2 revision 0259 without any issues.
+If you run into any errors please make sure you are on this version because it is
+known to work. If you still are having issues on the aforementioned version, just
+send me a message on my GitHub page (https://github.com/mattdocherty314).
+
+---=== PROGRAM USE ===---
+When the program is launched, the game is started in a paused state. Click a grayed
+out cell (dead) to change it to a yellow (alive) cell. If you want to play/pause the
+simulation just press the SPACE button. The following is a list of the rules (as
+developed by John Conway):
+-> 0-2 neighbouring alive cells, cell dies of under population.
+-> 3 or 4 neighbouting alive cells, cell is born.
+-> 5-8 neighbouring alive cells, cell dies of over population.
+
+---=== VERSION HISTORY ===---
+---> v1.0.0
+- Added the base program
+
+---> TODO
+- Make into an executeable
+- Better comments in code
+- Better screen looping
+- Add more controls
+	* Remove cells
+	* Change rules
+	* Screen looping toggle
