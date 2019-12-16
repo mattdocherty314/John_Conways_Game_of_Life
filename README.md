@@ -10,7 +10,7 @@ Environment. I was inspired to make it after hearing about the program from the 
 This program has been tested on Processing 3.3.2 revision 0259 without any issues.
 If you run into any errors please make sure you are on this version because it is
 known to work. If you still are having issues on the aforementioned version, just
-send me a message on my GitHub page (https://github.com/mattdocherty314).
+send me a message on my [GitHub](https://github.com/mattdocherty314).
 
 ## Program Use
 When the program is launched, the game is started in a paused state. Click a grayed
