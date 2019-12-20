@@ -26,29 +26,29 @@ function Cell(cellX, cellY, cellStatus, cellList) {
   this.render = function() {
     if (this.status === "dead") {
       fill(191);
-      rect(this.x, this.y, 10, 10);
+      rect(this.x, this.y, 20, 20);
     }
     if (this.status === "alive") {
       fill(255, 255, 0);
-      rect(this.x, this.y, 10, 10);
+      rect(this.x, this.y, 20, 20);
     }
   }
   
   this.logic = function() {
     if (this.status === "alive") {
       let surround_cells = 0;
-      if (this.list-51 > -1) {
-        if (all_cells[parseInt(this.list)-51].isAlive()) {
+      if (this.list-56 > -1) {
+        if (all_cells[parseInt(this.list)-26].isAlive()) {
           surround_cells++;
         }
       }
-      if (this.list-50 > -1) {
-        if (all_cells[parseInt(this.list)-50].isAlive()) {
+      if (this.list-25 > -1) {
+        if (all_cells[parseInt(this.list)-25].isAlive()) {
           surround_cells++;
         }
       }
-      if (this.list-49 > -1) {
-        if (all_cells[parseInt(this.list)-49].isAlive()) {
+      if (this.list-24 > -1) {
+        if (all_cells[parseInt(this.list)-24].isAlive()) {
           surround_cells++;
         }
       }
@@ -57,23 +57,23 @@ function Cell(cellX, cellY, cellStatus, cellList) {
           surround_cells++;
         }
       }
-      if (this.list+1 < 2500) {
+      if (this.list+1 < 625) {
         if (all_cells[parseInt(this.list)+1].isAlive()) {
           surround_cells++;
         }
       }
-      if (this.list+49 < 2500) {
-        if (all_cells[parseInt(this.list)+49].isAlive()) {
+      if (this.list+24 < 625) {
+        if (all_cells[parseInt(this.list)+24].isAlive()) {
           surround_cells++;
         }
       }
-      if (this.list+50 < 2500) {
-        if (all_cells[parseInt(this.list)+50].isAlive()) {
+      if (this.list+25 < 625) {
+        if (all_cells[parseInt(this.list)+25].isAlive()) {
           surround_cells++;
         }
       }
-      if (this.list+51 < 2500) {
-        if (all_cells[parseInt(this.list)+51].isAlive()) {
+      if (this.list+26 < 625) {
+        if (all_cells[parseInt(this.list)+26].isAlive()) {
           surround_cells++;
         }
       }
@@ -87,17 +87,17 @@ function Cell(cellX, cellY, cellStatus, cellList) {
     if (this.status === "dead") {
       let surround_cells = 0;
       if (this.list-51 > -1) {
-        if (all_cells[parseInt(this.list)-51].isAlive()) {
+        if (all_cells[parseInt(this.list)-26].isAlive()) {
           surround_cells++;
         }
       }
       if (this.list-50 > -1) {
-        if (all_cells[parseInt(this.list)-50].isAlive()) {
+        if (all_cells[parseInt(this.list)-25].isAlive()) {
           surround_cells++;
         }
       }
       if (this.list-49 > -1) {
-        if (all_cells[parseInt(this.list)-49].isAlive()) {
+        if (all_cells[parseInt(this.list)-24].isAlive()) {
           surround_cells++;
         }
       }
@@ -106,38 +106,38 @@ function Cell(cellX, cellY, cellStatus, cellList) {
           surround_cells++;
         }
       }
-      if (this.list+1 < 2500) {
+      if (this.list+1 < 625) {
         if (all_cells[parseInt(this.list)+1].isAlive()) {
           surround_cells++;
         }
       }
-      if (this.list+49 < 2500) {
-        if (all_cells[parseInt(this.list)+49].isAlive()) {
+      if (this.list+24 < 625) {
+        if (all_cells[parseInt(this.list)+24].isAlive()) {
           surround_cells++;
         }
       }
-      if (this.list+50 < 2500) {
-        if (all_cells[parseInt(this.list)+50].isAlive()) {
+      if (this.list+25 < 625) {
+        if (all_cells[parseInt(this.list)+25].isAlive()) {
           surround_cells++;
         }
       }
-      if (this.list+51 < 2500) {
-        if (all_cells[parseInt(this.list)+51].isAlive()) {
+      if (this.list+26 < 625) {
+        if (all_cells[parseInt(this.list)+26].isAlive()) {
           surround_cells++;
         }
       }
       if (surround_cells == 3) {
-        status = "born";
+        this.status = "born";
       }
     }
   }
   
   this.nextstage = function() {
     if (this.status === "dying") {
-      status = "dead";
+      this.status = "dead";
     }
     if (this.status === "born") {
-      status = "alive";
+      this.status = "alive";
     }
   }
 }
@@ -181,10 +181,10 @@ function mousePressed() {
 }
 
 function clickcells() {
-  for (let i = 0; i < 50; i++) {
-    for (let j = 0; j < 50; j++) {
-      if ((mouseX > i*10)&&(mouseX < (i+1)*10)&&(mouseY > j*10)&&(mouseY < (j+1)*10)) {
-        all_cells[i*50+j].convertAlive();
+  for (let i = 0; i < 25; i++) {
+    for (let j = 0; j < 25; j++) {
+      if ((mouseX > i*20)&&(mouseX < (i+1)*20)&&(mouseY > j*20)&&(mouseY < (j+1)*20)) {
+        all_cells[i*25+j].convertAlive();
       }
     }
   }
@@ -197,9 +197,9 @@ function drawcells() {
 }
 
 function generatecells() {
-  for (let i = 0; i < 50; i++) {
-    for (let j = 0; j < 50; j++) {
-      all_cells[cellno] = new Cell(10*i, 10*j, "dead", i*50+j);
+  for (let i = 0; i < 25; i++) {
+    for (let j = 0; j < 25; j++) {
+      all_cells[cellno] = new Cell(20*i, 20*j, "dead", i*25+j);
       cellno++;
     }
   }
