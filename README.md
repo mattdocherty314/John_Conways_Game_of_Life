@@ -4,7 +4,7 @@ This is a Game of Life game proposed by John Conway, made in the Processing3 Lan
 Environment. I was inspired to make it after hearing about the program from the Numberphile video, [Inventing Game of Life - Numberphile](https://www.youtube.com/watch?v=R9Plq-D1gEk)
 
 ## Dependencies
-* Processing3 (tested to v3.3.2 rev0259)
+* Processing3 (tested to v3.3.2 rev0270)
 
 ## Debugging
 This program has been tested on Processing 3.3.2 revision 0259 without any issues.
@@ -17,9 +17,9 @@ When the program is launched, the game is started in a paused state. Click a gra
 out cell (dead) to change it to a yellow (alive) cell. If you want to play/pause the
 simulation just press the SPACE button. The following is a list of the rules (as
 developed by John Conway):
-1. 0-2 neighbouring alive cells, cell dies of under population.
-2. 3 or 4 neighbouting alive cells, cell is born.
-3. 5-8 neighbouring alive cells, cell dies of over population.
+1. &lt;2 neighbouring alive cells, cell dies of under population.
+2. =3  neighbouring alive cells, cell is born.
+3. &gt;3 neighbouring alive cells, cell dies of over population.
 
 ## Version History
 ### v1.0.0
@@ -27,10 +27,12 @@ developed by John Conway):
 
 ### v1.1.0
 * Better code comments
+* Optimised algorithm
+* Cleaned up code
 
 ## TODO
-* Optimised algorithm
 * Make into an EXE
+* Toggle looping area
 * Add more controls
 	* Remove cells
 	* Change rules

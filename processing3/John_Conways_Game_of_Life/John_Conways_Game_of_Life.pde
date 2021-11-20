@@ -1,7 +1,12 @@
-cell[] all_cells = new cell[2500];
+Cell[] all_cells = new Cell[2500];
 
 boolean run = false;
 int cellno = 0;
+
+int CELL_SIZE = 20; // Cell size
+int CELL_SIDE = 50; // Amount of cells on a side
+
+enum state {ALIVE, DEAD, BORN, DYING};
 
 void setup() {
   size(1000, 1000);
@@ -18,8 +23,8 @@ void draw() {
   drawcells();
 }
 
-void keyPressed() {
-  if (keyCode == 32) { // SPACE
+void keyPressed() { 
+  if (keyCode == 32) { // SPACE = toggle run state
     run = !run;
   }
 }
@@ -33,10 +38,10 @@ void mousePressed() {
 
 /* Detect if a cell is clicked and make it alive if it is */
 void clickcells() {
-  for (int i = 0; i < 50; i++) {
-    for (int j = 0; j < 50; j++) {
-      if ((mouseX > i*20)&&(mouseX < (i+1)*20)&&(mouseY > j*20)&&(mouseY < (j+1)*20)) {
-        all_cells[i*50+j].convertAlive();
+  for (int i = 0; i < CELL_SIDE; i++) {
+    for (int j = 0; j < CELL_SIDE; j++) {
+      if ((mouseX > i*CELL_SIZE)&&(mouseX < (i+1)*CELL_SIZE)&&(mouseY > j*CELL_SIZE)&&(mouseY < (j+1)*CELL_SIZE)) {
+        all_cells[i*CELL_SIDE+j].convertAlive();
       }
     }
   }
@@ -51,16 +56,16 @@ void drawcells() {
 
 /* Create the cells and store them in an array */
 void generatecells() {
-  for (int i = 0; i < 50; i++) {
-    for (int j = 0; j < 50; j++) {
-      all_cells[cellno] = new cell(20*i, 20*j, "dead", i*50+j);
+  for (int i = 0; i < CELL_SIDE; i++) {
+    for (int j = 0; j < CELL_SIDE; j++) {
+      all_cells[cellno] = new Cell(CELL_SIZE*i, CELL_SIZE*j, state.DEAD, i*CELL_SIDE+j);
       cellno++;
     }
   }
   cellno = 0;
 }
 
-/* Apply the logic to all the cells then update them */
+/* Apply the logic to the call the cells then update them */
 void cell_logic() {
   for (int i = 0; i < all_cells.length; i++) {
     all_cells[i].logic();
