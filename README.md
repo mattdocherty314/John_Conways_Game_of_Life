@@ -29,9 +29,9 @@ developed by John Conway):
 * Better code comments
 * Optimised algorithm
 * Cleaned up code
+* Make into an EXE
 
 ## TODO
-* Make into an EXE
 * Toggle looping area
 * Add more controls
 	* Remove cells
