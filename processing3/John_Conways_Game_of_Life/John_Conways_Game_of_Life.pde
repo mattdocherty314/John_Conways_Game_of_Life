@@ -11,7 +11,7 @@ void setup() {
 }
 
 void draw() {
-  if (run == true) {
+  if (run == true) { // If in a run state
     cell_logic();
     //delay(100);
   }
@@ -19,17 +19,8 @@ void draw() {
 }
 
 void keyPressed() {
-  if (keyCode == 32) {
-    if (run == true) {
-      run = false;
-    }
-    else if (run == false) {
-      run = true;
-    }
-  }
-  if (keyCode == 10) {
-    run = false;
-    generatecells();
+  if (keyCode == 32) { // SPACE
+    run = !run;
   }
 }
 
@@ -40,6 +31,7 @@ void mousePressed() {
   clickcells();
 }
 
+/* Detect if a cell is clicked and make it alive if it is */
 void clickcells() {
   for (int i = 0; i < 50; i++) {
     for (int j = 0; j < 50; j++) {
@@ -50,12 +42,14 @@ void clickcells() {
   }
 }
 
+/* Draw the cells to the screen */
 void drawcells() {
   for (int i = 0; i < all_cells.length; i++) {
     all_cells[i].render();
   }
 }
 
+/* Create the cells and store them in an array */
 void generatecells() {
   for (int i = 0; i < 50; i++) {
     for (int j = 0; j < 50; j++) {
@@ -66,6 +60,7 @@ void generatecells() {
   cellno = 0;
 }
 
+/* Apply the logic to all the cells then update them */
 void cell_logic() {
   for (int i = 0; i < all_cells.length; i++) {
     all_cells[i].logic();

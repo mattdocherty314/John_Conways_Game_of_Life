@@ -25,10 +25,12 @@ developed by John Conway):
 ### v1.0.0
 * Added the base program
 
+### v1.1.0
+* Better code comments
+
 ## TODO
-* Make into an executeable
-* Better comments in code
-* Better screen looping
+* Optimised algorithm
+* Make into an EXE
 * Add more controls
 	* Remove cells
 	* Change rules

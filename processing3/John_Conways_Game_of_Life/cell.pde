@@ -1,14 +1,17 @@
+/* An individual cell */
 class cell {
-  float x, y, list;
+  float x, y, idx;
   String status;
   
-  cell(float cellx, float celly, String cellstatus, float cell_list) {
+  // Initialise the Cell with an x, y, state & index
+  cell(float cellx, float celly, String cellstatus, float cell_idx) {
     x = cellx;
     y = celly;
-    list = cell_list;
+    idx = cell_idx;
     status = cellstatus;
   }
   
+  // Checks to see if a cell is alive or still alive in the iteration
   boolean isAlive() {
     if ((status.equals("alive")) || (status.equals("dying"))) {
       return true;
@@ -18,10 +21,12 @@ class cell {
     }
   }
   
+  // Convert the cells to an alive one
   void convertAlive() {
     status = "alive";
   }
   
+  // Render the cell as dead as grey or alive as yellow
   void render() {
     if (status.equals("dead")) {
       fill(191);
@@ -33,46 +38,47 @@ class cell {
     }
   }
   
+  // Count the cells alive around the cell and if <1 or >4 turn it to dying, =3 to born
   void logic() {
     if (status.equals("alive")) {
       int surround_cells = 0;
-      if (list-51 > -1) {
-        if (all_cells[int(list)-51].isAlive()) {
+      if (idx-51 > -1) {
+        if (all_cells[int(idx)-51].isAlive()) {
           surround_cells++;
         }
       }
-      if (list-50 > -1) {
-        if (all_cells[int(list)-50].isAlive()) {
+      if (idx-50 > -1) {
+        if (all_cells[int(idx)-50].isAlive()) {
           surround_cells++;
         }
       }
-      if (list-49 > -1) {
-        if (all_cells[int(list)-49].isAlive()) {
+      if (idx-49 > -1) {
+        if (all_cells[int(idx)-49].isAlive()) {
           surround_cells++;
         }
       }
-      if (list-1 > -1) {
-        if (all_cells[int(list)-1].isAlive()) {
+      if (idx-1 > -1) {
+        if (all_cells[int(idx)-1].isAlive()) {
           surround_cells++;
         }
       }
-      if (list+1 < 2500) {
-        if (all_cells[int(list)+1].isAlive()) {
+      if (idx+1 < 2500) {
+        if (all_cells[int(idx)+1].isAlive()) {
           surround_cells++;
         }
       }
-      if (list+49 < 2500) {
-        if (all_cells[int(list)+49].isAlive()) {
+      if (idx+49 < 2500) {
+        if (all_cells[int(idx)+49].isAlive()) {
           surround_cells++;
         }
       }
-      if (list+50 < 2500) {
-        if (all_cells[int(list)+50].isAlive()) {
+      if (idx+50 < 2500) {
+        if (all_cells[int(idx)+50].isAlive()) {
           surround_cells++;
         }
       }
-      if (list+51 < 2500) {
-        if (all_cells[int(list)+51].isAlive()) {
+      if (idx+51 < 2500) {
+        if (all_cells[int(idx)+51].isAlive()) {
           surround_cells++;
         }
       }
@@ -85,43 +91,43 @@ class cell {
     }
     if (status.equals("dead")) {
       int surround_cells = 0;
-      if (list-51 > -1) {
-        if (all_cells[int(list)-51].isAlive()) {
+      if (idx-51 > -1) {
+        if (all_cells[int(idx)-51].isAlive()) {
           surround_cells++;
         }
       }
-      if (list-50 > -1) {
-        if (all_cells[int(list)-50].isAlive()) {
+      if (idx-50 > -1) {
+        if (all_cells[int(idx)-50].isAlive()) {
           surround_cells++;
         }
       }
-      if (list-49 > -1) {
-        if (all_cells[int(list)-49].isAlive()) {
+      if (idx-49 > -1) {
+        if (all_cells[int(idx)-49].isAlive()) {
           surround_cells++;
         }
       }
-      if (list-1 > -1) {
-        if (all_cells[int(list)-1].isAlive()) {
+      if (idx-1 > -1) {
+        if (all_cells[int(idx)-1].isAlive()) {
           surround_cells++;
         }
       }
-      if (list+1 < 2500) {
-        if (all_cells[int(list)+1].isAlive()) {
+      if (idx+1 < 2500) {
+        if (all_cells[int(idx)+1].isAlive()) {
           surround_cells++;
         }
       }
-      if (list+49 < 2500) {
-        if (all_cells[int(list)+49].isAlive()) {
+      if (idx+49 < 2500) {
+        if (all_cells[int(idx)+49].isAlive()) {
           surround_cells++;
         }
       }
-      if (list+50 < 2500) {
-        if (all_cells[int(list)+50].isAlive()) {
+      if (idx+50 < 2500) {
+        if (all_cells[int(idx)+50].isAlive()) {
           surround_cells++;
         }
       }
-      if (list+51 < 2500) {
-        if (all_cells[int(list)+51].isAlive()) {
+      if (idx+51 < 2500) {
+        if (all_cells[int(idx)+51].isAlive()) {
           surround_cells++;
         }
       }
@@ -131,6 +137,7 @@ class cell {
     }
   }
   
+  // Apply the update to the board to have only dead or alive cells
   void nextstage() {
     if (status == "dying") {
       status = "dead";
