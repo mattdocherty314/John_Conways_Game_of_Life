@@ -22,15 +22,15 @@ class Cell {
     status = state.ALIVE;
   }
   
-  // Render the cell as dead as grey or alive as yellow
+  // Render the cell as dead as black or alive as white
   void render() {
     switch (status) {
       case DEAD:
-        fill(191);
+        fill(0);
         rect(x, y, CELL_SIZE, CELL_SIZE);
         break;
       case ALIVE:
-        fill(255, 255, 0);
+        fill(255);
         rect(x, y, CELL_SIZE, CELL_SIZE);
         break;
       default:
@@ -45,7 +45,7 @@ class Cell {
       int[] neighbours = {-CELL_SIDE-1, -CELL_SIDE, -CELL_SIDE+1, -1, +1, +CELL_SIDE-1, +CELL_SIDE, +CELL_SIDE+1};
       for (int i : neighbours) {
         try { // try but may be out of the board
-          if (all_cells[idx+i].isAlive()) {
+          if (allCells[idx+i].isAlive()) {
             surround_cells++;
           }
         }
@@ -72,7 +72,7 @@ class Cell {
   }
   
   // Apply the update to the board to have only dead or alive cells
-  void nextstage() {
+  void nextStage() {
     if (status == state.DYING) {
       status = state.DEAD;
     }
