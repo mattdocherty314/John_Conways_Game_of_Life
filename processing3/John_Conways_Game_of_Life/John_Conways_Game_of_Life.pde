@@ -75,7 +75,7 @@ void cellLogic() {
   }
   for (int i = 0; i < CELL_SIDE; i++) {
     for (int j = 0; j < CELL_SIDE; j++) {
-      allCells[i][j].render();
+      allCells[i][j].nextStage();
     }
   }
 }

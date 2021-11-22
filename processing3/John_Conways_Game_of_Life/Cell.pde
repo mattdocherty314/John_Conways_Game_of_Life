@@ -45,7 +45,7 @@ class Cell {
       int[] neighbours = {-CELL_SIDE-1, -CELL_SIDE, -CELL_SIDE+1, -1, +1, +CELL_SIDE-1, +CELL_SIDE, +CELL_SIDE+1};
       for (int i : neighbours) {
         try { // try but may be out of the board
-          if (allCells[idx+i].isAlive()) {
+          if (allCells[(idx+i)/CELL_SIDE][(idx+i)%CELL_SIDE].isAlive()) {
             surround_cells++;
           }
         }
