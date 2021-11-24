@@ -1,14 +1,14 @@
 /* An individual cell */
 class Cell {
   float x, y;
-  int idx;
+  int[] idx;
   state status;
   
   // Initialise the Cell with an x, y, state & index
-  Cell(float cellx, float celly, state cellstatus, int cell_idx) {
+  Cell(float cellx, float celly, state cellstatus, int[] cellIdx) {
     x = cellx;
     y = celly;
-    idx = cell_idx;
+    idx = cellIdx;
     status = cellstatus;
   }
   
@@ -41,18 +41,18 @@ class Cell {
   // Count the cells alive around the cell and if <1 or >4 turn it to dying, =3 to born
   void logic() {
     if (status == state.ALIVE || status == state.DEAD) {
-      int surround_cells = 0;
-      int[] neighbours = {-CELL_SIDE-1, -CELL_SIDE, -CELL_SIDE+1, -1, +1, +CELL_SIDE-1, +CELL_SIDE, +CELL_SIDE+1};
-      for (int i : neighbours) {
+      int surroundCells = 0;
+      int[][] neighbours = {{-1,-1}, {-1,0}, {-1,1}, {0,-1}, {0,1}, {1,-1}, {1,0}, {1,1}};
+      for (int[] i : neighbours) {
         try { // try but may be out of the board
-          if (allCells[(idx+i)/CELL_SIDE][(idx+i)%CELL_SIDE].isAlive()) {
-            surround_cells++;
+          if (allCells[idx[0]+i[0]][idx[1]+i[1]].isAlive()) {
+            surroundCells++;
           }
         }
         catch (Exception e) {
         }
       }
-      switch (surround_cells) {
+      switch (surroundCells) {
         case 0: case 1: // UNDERPOPULATION
           if (status == state.ALIVE)
             status = state.DYING;

@@ -31,8 +31,11 @@ developed by John Conway):
 * Cleaned up code
 * Make into an EXE
 
+### v1.2.0
+* Fixed screen looping
+* Added more UI to show game state
+
 ## TODO
-* Toggle looping area
 * Add more controls
 	* Remove cells
 	* Change rules

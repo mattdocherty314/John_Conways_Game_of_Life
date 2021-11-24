@@ -61,7 +61,7 @@ void drawCells() {
 void generateCells() {
   for (int i = 0; i < CELL_SIDE; i++) {
     for (int j = 0; j < CELL_SIDE; j++) {
-      allCells[i][j] = new Cell(CELL_SIZE*i, CELL_SIZE*j, state.DEAD, i*CELL_SIDE+j);
+      allCells[i][j] = new Cell(CELL_SIZE*i, CELL_SIZE*j, state.DEAD, new int[] {i,j});
     }
   }
 }
