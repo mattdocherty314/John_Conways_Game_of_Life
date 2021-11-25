@@ -1,8 +1,8 @@
 /* An individual cell */
 class Cell {
-  float x, y;
-  int[] idx;
-  state status;
+  private float x, y;
+  private int[] idx;
+  private state status;
   
   // Initialise the Cell with an x, y, state & index
   Cell(float cellx, float celly, state cellstatus, int[] cellIdx) {
@@ -20,6 +20,11 @@ class Cell {
   // Convert the cells to an alive one
   void convertAlive() {
     status = state.ALIVE;
+  }
+  
+  // Convert the cells to an dead one
+  void convertDead() {
+    status = state.DEAD;
   }
   
   // Render the cell as dead as black or alive as white
@@ -45,7 +50,16 @@ class Cell {
       int[][] neighbours = {{-1,-1}, {-1,0}, {-1,1}, {0,-1}, {0,1}, {1,-1}, {1,0}, {1,1}};
       for (int[] i : neighbours) {
         try { // try but may be out of the board
-          if (allCells[idx[0]+i[0]][idx[1]+i[1]].isAlive()) {
+          int x, y;
+          if (loop) { // if screen looping is on
+            x = (idx[0]+i[0]+CELL_SIDE)%CELL_SIDE;
+            y = (idx[1]+i[1]+CELL_SIDE)%CELL_SIDE;
+          }
+          else { // otherwise
+            x = (idx[0]+i[0]);
+            y = (idx[1]+i[1]);
+          }
+          if (allCells[x][y].isAlive()) {
             surroundCells++;
           }
         }

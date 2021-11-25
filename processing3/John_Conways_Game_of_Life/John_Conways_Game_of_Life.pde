@@ -1,9 +1,12 @@
 Cell[][] allCells = new Cell[50][50];
 
+// Game settings
 boolean run = false;
-int cellno = 0;
+boolean loop = true;
+int gameSpeed = 3;
 
-int CELL_SIDE = 50; // Amount of cells on a side
+// Game parameters
+int CELL_SIDE = allCells.length; // Amount of cells on a side
 int CELL_SIZE = 700/CELL_SIDE; // Cell size
 
 enum state {ALIVE, DEAD, BORN, DYING};
@@ -18,7 +21,7 @@ void draw() {
   background(220);
   if (run == true) { // If in a run state
     cellLogic();
-    //delay(100);
+    delay(int(pow(2,gameSpeed)));
   }
   drawCells();
   drawInfo();
@@ -27,6 +30,15 @@ void draw() {
 void keyPressed() { 
   if (keyCode == 32) { // SPACE = toggle run state
     run = !run;
+  }
+  if ((key == 'l') || (key == 'L')) { // L = toggle loop
+    loop = !loop;
+  }
+  if (key == '<') { // < = slow down
+    gameSpeed = max(0, gameSpeed-1);
+  }
+  if (key == '>') { // > = speed up
+    gameSpeed = min(10, gameSpeed+1);
   }
 }
 
@@ -42,7 +54,12 @@ void clickCells() {
   for (int i = 0; i < CELL_SIDE; i++) {
     for (int j = 0; j < CELL_SIDE; j++) {
       if ((mouseX > i*CELL_SIZE)&&(mouseX < (i+1)*CELL_SIZE)&&(mouseY > j*CELL_SIZE)&&(mouseY < (j+1)*CELL_SIZE)) {
-        allCells[i][j].convertAlive();
+        if (mouseButton == 37) { // LEFT CLICK = alive
+          allCells[i][j].convertAlive();
+        }
+        if (mouseButton == 39) { // RIGHT CLICK = dead
+          allCells[i][j].convertDead();
+        }
       }
     }
   }

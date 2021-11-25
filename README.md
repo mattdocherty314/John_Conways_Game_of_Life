@@ -13,13 +13,19 @@ known to work. If you still are having issues on the aforementioned version, jus
 send me a message on my [GitHub](https://github.com/mattdocherty314).
 
 ## Program Use
-When the program is launched, the game is started in a paused state. Click a grayed
-out cell (dead) to change it to a yellow (alive) cell. If you want to play/pause the
-simulation just press the SPACE button. The following is a list of the rules (as
-developed by John Conway):
+When the program is launched, the game is started in a paused state. The following
+is a list of the rules (as developed by John Conway):
 1. &lt;2 neighbouring alive cells, cell dies of under population.
 2. =3  neighbouring alive cells, cell is born.
 3. &gt;3 neighbouring alive cells, cell dies of over population.
+
+### Controls
+* `SPACE` = PLAY / PAUSE
+* `LEFT CLICK` = PLACE ALIVE CELL
+* `RIGHT CLICK` = REMOVE ALIVE CELL
+* `L` = TOGGLE SCREEN LOOPING
+* `<` = SLOW DOWN
+* `>` = SPEED UP
 
 ## Version History
 ### v1.0.0
@@ -34,9 +40,12 @@ developed by John Conway):
 ### v1.2.0
 * Fixed screen looping
 * Added more UI to show game state
-
-## TODO
 * Add more controls
 	* Remove cells
-	* Change rules
 	* Screen looping toggle
+	* Speed controls
+
+
+## TODO
+* More controls
+	* Change rules
