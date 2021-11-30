@@ -1,9 +1,7 @@
 Cell[][] allCells = new Cell[50][50];
-
-// Game settings
-boolean run = false;
-boolean loop = true;
-int gameSpeed = 3;
+ToggleSwitch pausedSwitch = new ToggleSwitch(725, 175, true);
+ToggleSwitch loopSwitch = new ToggleSwitch(725, 225, true);
+IncrDecrInput speedInput = new IncrDecrInput(760, 275, 2, 1, 9);
 
 // Game parameters
 int CELL_SIDE = allCells.length; // Amount of cells on a side
@@ -19,26 +17,29 @@ void setup() {
 
 void draw() {
   background(220);
-  if (run == true) { // If in a run state
+  if (!pausedSwitch.state) { // If in a run state
     cellLogic();
-    delay(int(pow(2,gameSpeed)));
+    delay(int(pow(2,speedInput.value)));
   }
   drawCells();
   drawInfo();
+  pausedSwitch.render();
+  loopSwitch.render();
+  speedInput.render();
 }
 
 void keyPressed() { 
   if (keyCode == 32) { // SPACE = toggle run state
-    run = !run;
+    pausedSwitch.toggle();
   }
   if ((key == 'l') || (key == 'L')) { // L = toggle loop
-    loop = !loop;
+    loopSwitch.toggle();
   }
   if (key == '<') { // < = slow down
-    gameSpeed = max(0, gameSpeed-1);
+    speedInput.decr();
   }
   if (key == '>') { // > = speed up
-    gameSpeed = min(10, gameSpeed+1);
+    speedInput.incr();
   }
 }
 
@@ -47,6 +48,9 @@ void mouseDragged() {
 }
 void mousePressed() {
   clickCells();
+  pausedSwitch.click();
+  loopSwitch.click();
+  speedInput.click();
 }
 
 /* Detect if a cell is clicked and make it alive if it is */
@@ -102,10 +106,23 @@ void drawInfo() {
   fill(0);
   textSize(36);
   text("John Conway's Game of Life", 700, 0, 300, 150);
-  textSize(24);
-  if (!run) {
-    text("PAUSED", 850, 100, 300, 50);
+  textSize(28);
+  if (!pausedSwitch.state) {
+    text("UNPAUSED", 800, 160, 300, 50);
   }
+  else {
+    text("PAUSED", 800, 160, 300, 50);
+  }
+  
+  if (loopSwitch.state) {
+    text("LOOP", 800, 210, 300, 50);
+  }
+  else {
+    text("NO LOOP", 800, 210, 300, 50);
+  }
+  
+  text("SPEED", 830, 260, 300, 50);
+  
   if (mouseX < 700) {
     text("Cell: ("+str(mouseX/CELL_SIZE)+", "+str(mouseY/CELL_SIZE)+")", 700, 600, 300, 50);
   }

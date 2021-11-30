@@ -51,7 +51,7 @@ class Cell {
       for (int[] i : neighbours) {
         try { // try but may be out of the board
           int x, y;
-          if (loop) { // if screen looping is on
+          if (loopSwitch.state) { // if screen looping is on
             x = (idx[0]+i[0]+CELL_SIDE)%CELL_SIDE;
             y = (idx[1]+i[1]+CELL_SIDE)%CELL_SIDE;
           }

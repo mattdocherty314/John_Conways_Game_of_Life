@@ -39,13 +39,16 @@ is a list of the rules (as developed by John Conway):
 
 ### v1.2.0
 * Fixed screen looping
-* Added more UI to show game state
+* Added more UI
+	* Title
+	* Input Toggles
+	* Input (Incr/Decr)meter
 * Add more controls
 	* Remove cells
 	* Screen looping toggle
 	* Speed controls
 
-
 ## TODO
 * More controls
 	* Change rules
+	* Increase Resolution
