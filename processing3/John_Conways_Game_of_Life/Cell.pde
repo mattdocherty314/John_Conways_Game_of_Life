@@ -66,21 +66,14 @@ class Cell {
         catch (Exception e) {
         }
       }
-      switch (surroundCells) {
-        case 0: case 1: // UNDERPOPULATION
-          if (status == state.ALIVE)
-            status = state.DYING;
-          break;
-        case 4: case 5: case 6: case 7: case 8: // OVERPOPULATION
-          if (status == state.ALIVE)
-            status = state.DYING;
-          break;
-        case 3: // REPRODUCTION
-          if (status == state.DEAD)
-            status = state.BORN;
-          break;
-        default:
-          break;
+      if ((surroundCells <= underpopInput.value) && (status == state.ALIVE)) { // UNDERPOPULATION
+        status = state.DYING;
+      }
+      if ((surroundCells >= overpopInput.value) && (status == state.ALIVE)) { // OVERPOPULATION
+        status = state.DYING;
+      }
+      if ((surroundCells == reprodInput.value) && (status == state.DEAD)) { // REPRODUCTION
+        status = state.BORN;
       }
     }
   }

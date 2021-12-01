@@ -26,6 +26,7 @@ class IncrDecrInput {
     fill(255);
     rect(x-10, y-20, 30, 40);
     fill(0);
+    textSize(28.0/(str(value).length()));
     text(str(value), x-5, y+10);
   }
   

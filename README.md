@@ -47,8 +47,5 @@ is a list of the rules (as developed by John Conway):
 	* Remove cells
 	* Screen looping toggle
 	* Speed controls
-
-## TODO
-* More controls
 	* Change rules
-	* Increase Resolution
+	* Increase / Decrease Cells
