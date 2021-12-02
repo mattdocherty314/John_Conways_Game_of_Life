@@ -26,6 +26,8 @@ is a list of the rules (as developed by John Conway):
 * `L` = TOGGLE SCREEN LOOPING
 * `<` = SLOW DOWN
 * `>` = SPEED UP
+* `+` = INCREASE CELL COUNT
+* `-` = DECREASE CELL COUNT
 
 ## Version History
 ### v1.0.0

@@ -55,6 +55,18 @@ void keyPressed() {
   if (key == '>') { // > = speed up
     speedInput.incr();
   }
+  if (key == '+') { // + = increase cells
+    sizeInput.incr();
+  }
+  if (key == '-') { // - = decrease cells
+    sizeInput.decr();
+  }
+  if (CELL_SIDE != sizeInput.value) { // adjust size of grid when value changes
+    CELL_SIDE = sizeInput.value;
+    CELL_SIZE = 700.0/CELL_SIDE;
+    allCells = new Cell[CELL_SIDE][CELL_SIDE];
+    generateCells();
+  }
 }
 
 void mouseDragged() {
@@ -72,7 +84,7 @@ void mousePressed() {
   reprodInput.click();
   
   sizeInput.click();
-  if (CELL_SIDE != sizeInput.value) {
+  if (CELL_SIDE != sizeInput.value) { // adjust size of grid when value changes
     CELL_SIDE = sizeInput.value;
     CELL_SIZE = 700.0/CELL_SIDE;
     allCells = new Cell[CELL_SIDE][CELL_SIDE];
