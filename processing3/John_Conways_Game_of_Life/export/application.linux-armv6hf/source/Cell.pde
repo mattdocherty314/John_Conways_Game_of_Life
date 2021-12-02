@@ -1,14 +1,14 @@
 /* An individual cell */
 class Cell {
-  float x, y;
-  int idx;
-  state status;
+  private float x, y;
+  private int[] idx;
+  private state status;
   
   // Initialise the Cell with an x, y, state & index
-  Cell(float cellx, float celly, state cellstatus, int cell_idx) {
+  Cell(float cellx, float celly, state cellstatus, int[] cellIdx) {
     x = cellx;
     y = celly;
-    idx = cell_idx;
+    idx = cellIdx;
     status = cellstatus;
   }
   
@@ -22,15 +22,20 @@ class Cell {
     status = state.ALIVE;
   }
   
-  // Render the cell as dead as grey or alive as yellow
+  // Convert the cells to an dead one
+  void convertDead() {
+    status = state.DEAD;
+  }
+  
+  // Render the cell as dead as black or alive as white
   void render() {
     switch (status) {
       case DEAD:
-        fill(191);
+        fill(0);
         rect(x, y, CELL_SIZE, CELL_SIZE);
         break;
       case ALIVE:
-        fill(255, 255, 0);
+        fill(255);
         rect(x, y, CELL_SIZE, CELL_SIZE);
         break;
       default:
@@ -41,38 +46,40 @@ class Cell {
   // Count the cells alive around the cell and if <1 or >4 turn it to dying, =3 to born
   void logic() {
     if (status == state.ALIVE || status == state.DEAD) {
-      int surround_cells = 0;
-      int[] neighbours = {-CELL_SIDE-1, -CELL_SIDE, -CELL_SIDE+1, -1, +1, +CELL_SIDE-1, +CELL_SIDE, +CELL_SIDE+1};
-      for (int i : neighbours) {
+      int surroundCells = 0;
+      int[][] neighbours = {{-1,-1}, {-1,0}, {-1,1}, {0,-1}, {0,1}, {1,-1}, {1,0}, {1,1}};
+      for (int[] i : neighbours) {
         try { // try but may be out of the board
-          if (all_cells[idx+i].isAlive()) {
-            surround_cells++;
+          int x, y;
+          if (loopSwitch.state) { // if screen looping is on
+            x = (idx[0]+i[0]+CELL_SIDE)%CELL_SIDE;
+            y = (idx[1]+i[1]+CELL_SIDE)%CELL_SIDE;
+          }
+          else { // otherwise
+            x = (idx[0]+i[0]);
+            y = (idx[1]+i[1]);
+          }
+          if (allCells[x][y].isAlive()) {
+            surroundCells++;
           }
         }
         catch (Exception e) {
         }
       }
-      switch (surround_cells) {
-        case 0: case 1: // UNDERPOPULATION
-          if (status == state.ALIVE)
-            status = state.DYING;
-          break;
-        case 4: case 5: case 6: case 7: case 8: // OVERPOPULATION
-          if (status == state.ALIVE)
-            status = state.DYING;
-          break;
-        case 3: // REPRODUCTION
-          if (status == state.DEAD)
-            status = state.BORN;
-          break;
-        default:
-          break;
+      if ((surroundCells <= underpopInput.value) && (status == state.ALIVE)) { // UNDERPOPULATION
+        status = state.DYING;
+      }
+      if ((surroundCells >= overpopInput.value) && (status == state.ALIVE)) { // OVERPOPULATION
+        status = state.DYING;
+      }
+      if ((surroundCells == reprodInput.value) && (status == state.DEAD)) { // REPRODUCTION
+        status = state.BORN;
       }
     }
   }
   
   // Apply the update to the board to have only dead or alive cells
-  void nextstage() {
+  void nextStage() {
     if (status == state.DYING) {
       status = state.DEAD;
     }
